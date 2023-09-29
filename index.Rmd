@@ -1,6 +1,6 @@
 ---
 title: "Gov 50 Final Project"
-author: "Your Name Here"
+author: Adithya Madduri
 description: "My final project"
 output:
   distill::distill_article:
@@ -11,4 +11,4 @@ output:
 
 ## Project thoughts
 
-I am interested in exploring data related to...dsffdgdgde
+I am interested in exploring data related to many different political topics. I would be especially interested in examining data related to controversial United States Presidential elections from the past such as the election of 2000 or even more historical elections depending on how far back the data we have extends too. I'm also interested in looking at developing countries and possibly using Hans Rosling's Gapminder data set from the book factfullness. I think it would be cool to take a topic form the book and conduct some more statistical analysis on it and draw conclusions from that data. Overall, I'm interested in these two topics, but I'm open to a range of different ideas.
