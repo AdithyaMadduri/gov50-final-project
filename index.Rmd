@@ -15,10 +15,12 @@ I am interested in exploring data related to many different political topics. I 
 
 
 ## Milestone number 2
+
 Do higher teacher salaries contribute to enhanced student academic outcomes? In this study, I plan to examine how higher teacher salaries contribute to student academic outcomes. I hypothesize that higher teacher salaries will contribute to better student academic outcomes since teachers will be more committed to educating their students, contributing to better classroom instruction, and therefore better educational outcomes for the students. When teachers are paid less, I believe that they will be less committed to their jobs, and this will mean that students receive a lower quality of education and will likely mean that the future educational outcomes of the students are worse. The data source I’m using is the Massachusetts Public School Data for the year 2017, and my sample size is 1800 Public schools in Massachusetts, including elementary, middle, and high schools. My unit of analysis is an individual school, for example Abington high school. The explanatory variables of interest are average salary and total salary. The variable will be measured in United States Dollars. My outcome variables include various measures of academic performance, specifically average SAT Math and Reading scores for students from the school and the number of high school graduates from the school. For instance, if the average salary variable was equal to $45,000, that means that the average teacher salary was $45,000. Likewise for the outcome variable, if the average  SAT Math score for a school is 700, this corresponds to This data is taken from the Massachusetts Public School data for the year 2017 and its validity is established by the fact that it comes directly from the Massachusetts Department of Elementary and Secondary Education. If I observe higher average SAT scores and high school graduation rates when teacher pay is higher, then that will mean that higher teacher pay does correspond to better educational outcomes for students. However, if I observe that average SAT scores and graduation rates are not significantly higher when teacher pay is higher, then that will mean that teacher pay does not have a significant impact on educational outcomes. When I run a regression of average SAT scores and high school graduation rates on average teacher salary as an indicator variable a positive, significant coefficient would indicate support of my hypothesis.
 
 
 ## Milestone 3
+
 ```{r}
 library(tidyverse)
 library(readr)
