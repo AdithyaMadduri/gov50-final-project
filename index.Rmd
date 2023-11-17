@@ -48,4 +48,28 @@ ggplot(data = data_highschool,
   geom_point() + geom_smooth(method = "lm", se = FALSE) +
   scale_x_log10()
 ```
+## Milestone 4
+```{r}
+library(tidyverse)
+first_tibble <- data_highschool |>
+  group_by(`Salary Totals`) |>
+  summarize(avg_SAT = mean(Total_SAT))
 
+first_tibble
+
+
+
+most_paid <- first_tibble |>
+  slice_max(`Salary Totals`, n = 5)
+
+most_paid
+
+
+least_paid <- first_tibble |>
+  slice_min(`Salary Totals`, n = 5)
+
+least_paid
+```
+Looking at the data for the 5 highest and 5 lowest salary totals by district, we can see that SAT scores tend to be lower when salary totals are higher. From this data, for furtehr analysis, I need to clear out salary total values for districts that do not have an average SAT score. 
+
+Looking at this tibble and the previous two charts, it appears that a higher salary total for teachers is correlated with lower SAT test scores. This can be seen from the negative line of best fit on the second scatter plot. The negative slope on the line means indicatest that the correlation between salary totals and SAT test scores is negative. Therefore, as teacher salary totals increase, we would expect to see lower SAT test scores. 

@@ -1558,7 +1558,62 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 <p><img src="index_files/figure-html5/unnamed-chunk-4-1.png" width="624" /></p>
 </div>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<h2 id="milestone-4">Milestone 4</h2>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span>
+<span><span class='va'>first_tibble</span> <span class='op'>&lt;-</span> <span class='va'>data_highschool</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>`Salary Totals`</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>avg_SAT <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>Total_SAT</span><span class='op'>)</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>first_tibble</span></span></code></pre>
+</div>
+<pre><code># A tibble: 255 × 2
+   `Salary Totals` avg_SAT
+             &lt;dbl&gt;   &lt;dbl&gt;
+ 1         2198543    1502
+ 2         2414035    1653
+ 3         2852696    1564
+ 4         2866382      NA
+ 5         3017996    1625
+ 6         3182071    1447
+ 7         3261943    1496
+ 8         3451949    1574
+ 9         3850472    1755
+10         3874390    1517
+# ℹ 245 more rows</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>most_paid</span> <span class='op'>&lt;-</span> <span class='va'>first_tibble</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/slice.html'>slice_max</a></span><span class='op'>(</span><span class='va'>`Salary Totals`</span>, n <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>most_paid</span></span></code></pre>
+</div>
+<pre><code># A tibble: 5 × 2
+  `Salary Totals` avg_SAT
+            &lt;dbl&gt;   &lt;dbl&gt;
+1       383866184     NA 
+2       143116198   1287.
+3       130432206     NA 
+4        91426338     NA 
+5        80242396   1782.</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>least_paid</span> <span class='op'>&lt;-</span> <span class='va'>first_tibble</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/slice.html'>slice_min</a></span><span class='op'>(</span><span class='va'>`Salary Totals`</span>, n <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>least_paid</span></span></code></pre>
+</div>
+<pre><code># A tibble: 5 × 2
+  `Salary Totals` avg_SAT
+            &lt;dbl&gt;   &lt;dbl&gt;
+1         2198543    1502
+2         2414035    1653
+3         2852696    1564
+4         2866382      NA
+5         3017996    1625</code></pre>
+</div>
+<p>Looking at the data for the 5 highest and 5 lowest salary totals by district, we can see that SAT scores tend to be lower when salary totals are higher. From this data, for furtehr analysis, I need to clear out salary total values for districts that do not have an average SAT score.</p>
+<p>Looking at this tibble and the previous two charts, it appears that a higher salary total for teachers is correlated with lower SAT test scores. This can be seen from the negative line of best fit on the second scatter plot. The negative slope on the line means indicatest that the correlation between salary totals and SAT test scores is negative. Therefore, as teacher salary totals increase, we would expect to see lower SAT test scores.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
