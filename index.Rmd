@@ -1,7 +1,7 @@
 ---
 title: "Gov 50 Final Project"
 author: Adithya Madduri
-description: "Analysis of impact of Teacher Pay on Student SAT scores"
+description: "Analysis of impact of Teacher Pay on Student SAT scores for Massachusetts Public High Schools in 2017"
 output:
   distill::distill_article:
     self_contained: false
@@ -120,4 +120,4 @@ Results and Potential Explanations:
 Possible Confounding Factors:
 
 Conclusions:
-From the data it is clear that there was a negative correlation between teacher salaries and average SAT scores for high schools in the state of Massachusetts for the year 2017. 
+From the data it is clear that there was a negative correlation between teacher salaries and average SAT scores for Public high schools in the state of Massachusetts for the year 2017. 
