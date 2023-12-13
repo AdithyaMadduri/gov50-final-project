@@ -105,7 +105,7 @@ modelsummary::modelsummary(fit,
                                          "p = {p.value}"),
                            gof_map = c("nobs", "r.squared", "adj.r.squared"))
 ```
-In the above code, I ran a linear regression so that we could get a clearer picture of the relationship between average Salary and Average SAT scores. As we can see from the coefficients for the linear regression, looking at all high schools in the state of Massachusetts for the year 2017, as average Salary increases the average SAT score for the high school decreases by roughly 4.4 points. This suggests a correlation, but does not necesarily imply a causual effect. There could be many other factors influencing student SAT scores outside of teacher pay. 
+In the above code, I ran a linear regression so that we could get a clearer picture of the relationship between average Salary and Average SAT scores. As we can see from the coefficients for the linear regression, looking at all high schools in the state of Massachusetts for the year 2017, as average Salary increases the average SAT score for the high school decreases by roughly 4.4 points. This suggests a correlation, but does not necessarily imply a causal effect. There could be many other factors influencing student SAT scores outside of teacher pay. 
 
 ```{r Averge SAT Score per Pay Range}
 data_highschool <- data_highschool |>
@@ -128,12 +128,13 @@ sat_payrange <- data_highschool |>
 knitr::kable(sat_payrange, col.names = c("Pay Range", "Average SAT Score"))
 
 ```
-In this chart, we grouped the average salaries into 9 different categories. under $65,000; between $65,000 to 70,000; $70,000 to 75,000; $75,000 to 80,000; $80,000 to 85,000; $85,000 to 90,000; $90,000 to 95,000; and greater than $95,000. We then calculated the average SAT scores for each of these pay ranges. This again allows us to better understand the correlation between our two data columns. 
+In this chart, we grouped the average salaries into 9 different categories. under $65,000; between $65,000 to 70,000; $70,000 to 75,000; $75,000 to 80,000; $80,000 to 85,000; $85,000 to 90,000; $90,000 to 95,000; and greater than $95,000. We then calculated the average SAT scores for each of these pay ranges. This again allows us to better understand the correlation between our two data columns, average teacher pay and average student SAT scores. From this section, it becomes a little bit more clear that the relationship between average SAT scores and average teacher salary is not strictly linear. As the average salary range increases teacher pay tends to fluctuate, with periodic spikes. I believe that spikes could be skewing some of the data. For instance, there is a major drop in average SAT in the pay range between $85,000 and 90,000. This is major drop compared to the other pay ranges around it, since all the pay pervious pay ranges $80,000 to 85,000 and $75,000 to 80,000 both had average SAT scores around 1500. This drop is difficult to explain both in terms of the data and in the context of the study, and further investigation might be needed to see what causes this drop.
+Overall, from the data for Public High Schools in Massachusetts in 2017, it is clear that in general, higher average teacher salary values are associated with lower 
 
 
-Explanations of Results:
+Explanations of Results: From the results
 
-Possible Confounding Factors:
+Possible Confounding Factors: One possible confounding factor is that not all schools use SAT scores as a primary benchmark for student achievement, though it is the national standard for high school student achievement hence why it was chosen as the response variable for this study. It could be that some schools prioritize ACT scores, and only a select few students take SAT exams, contributing to lower or higher than anticipated average SAT scores.
 
 Conclusions:
 From the data it is clear that there was a negative correlation between teacher salaries and average SAT scores for Public high schools in the state of Massachusetts for the year 2017. 
