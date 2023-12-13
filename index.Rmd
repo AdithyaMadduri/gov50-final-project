@@ -25,8 +25,8 @@ The one variable I had to create for my data set, which I did so in the filterin
 ```{r Loading Data Package}
 library(tidyverse)
 library(readr)
+
 data_final <- read_csv("MA_Public_Schools_2017.csv")
-View(data_final)
 
 ```
 ```{r Filtering Dataset}
