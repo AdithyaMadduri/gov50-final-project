@@ -11,21 +11,30 @@ output:
 
 ## Introduction
 
-Do higher teacher salaries contribute to enhanced student academic performance? In this study, I plan to examine how higher teacher salaries contribute to student academic outcomes(for this study academic outcomes will be measured by SAT scores since the SAT is seen as a national benchmark examination to gauge student academic performance). I hypothesize that higher teacher salaries will contribute to better student academic outcomes since teachers will be more committed to educating their students, contributing to better classroom instruction, and therefore better educational outcomes for the students. When teachers are paid less, I believe that they will be less committed to their jobs, and this will mean that students receive a lower quality of education and will likely mean that the future educational outcomes of the students are worse. The data source I’m using is the Massachusetts Public School Data for the year 2017, and my sample size is 1800 Public schools in Massachusetts, including elementary, middle, and high schools. My unit of analysis is an individual school, for example Abington high school. The explanatory variables of interest are average salary and total salary. The variable will be measured in United States Dollars. My outcome variables include various measures of academic performance, specifically average SAT Math and Reading scores for students from the school and the number of high school graduates from the school. For instance, if the average salary variable was equal to $45,000, that means that the average teacher salary was $45,000. Likewise for the outcome variable, if the average  SAT Math score for a school is 700, this corresponds to an average SAT math score of 700. This data is taken from the Massachusetts Public School data for the year 2017 and its validity is established by the fact that it comes directly from the Massachusetts Department of Elementary and Secondary Education. If I observe higher average SAT scores when teacher pay is higher, then that will mean that higher teacher pay does correspond to better educational outcomes for students. However, if I observe that average SAT scores and graduation rates are not significantly higher when teacher pay is higher, then that will mean that teacher pay does not have a significant impact on educational outcomes. When I run a regression of average SAT scores and high school graduation rates on average teacher salary as an indicator variable a positive, significant coefficient would indicate support of my hypothesis.
+Do higher teacher salaries contribute to enhanced student academic performance? In this study, I plan to examine how higher teacher salaries contribute to student academic outcomes(for this study academic outcomes will be measured by SAT scores since the SAT is seen as a national benchmark examination to gauge student academic performance). I hypothesize that higher teacher salaries will contribute to better student academic outcomes since teachers will be more committed to educating their students, contributing to better classroom instruction, and therefore better educational outcomes for the students. When teachers are paid less, I believe that they will be less committed to their jobs, and this will mean that students receive a lower quality of education and will likely mean that the future educational outcomes of the students are worse. The data source I’m using is the Massachusetts Public School Data for the year 2017, and my sample size is 1800 Public schools in Massachusetts, including elementary, middle, and high schools. My unit of analysis is an individual school, for example Abington High School. The explanatory variables of interest are average salary and total salary. The variable will be measured in United States dollars. My outcome variables include various measures of academic performance, specifically average SAT Math and Reading scores for students from the school and the number of high school graduates from the school. For instance, if the average salary variable was equal to $45,000, that means that the average teacher salary was $45,000. Likewise for the outcome variable, if the average  SAT Math score for a school is 700, this corresponds to an average SAT math score of 700. This data is taken from the Massachusetts Public School data for the year 2017 and its validity is established by the fact that it comes directly from the Massachusetts Department of Elementary and Secondary Education. If I observe higher average SAT scores when teacher pay is higher, then that will mean that higher teacher pay does correspond to better educational outcomes for students. However, if I observe that average SAT scores and graduation rates are not significantly higher when teacher pay is higher, then that will mean that teacher pay does not have a significant impact on educational outcomes. When I run a regression of average SAT scores and high school graduation rates on average teacher salary as an indicator variable a positive, significant coefficient would indicate support of my hypothesis.
 
 
 ## Data
+
+My original data was sourced from the Massachusetts Department of Elementary and Secondary Education from which I sourced the Massachusetts Public School Data for the year 2017. Here is the citation for the data source: “Massachusetts Public Schools Data.” Massachusetts, 2017. 
+
+My initial data set contained 302 variables for over 1,861 schools. Some of the variables included the name of the school, the type of school it was, enrollment numbers per grade, the demographic make-up of the school, salary totals, scores on standardized state and national exams. However, an important note was that the data initially contained information about all the schools in Massachusetts, so I decided to filter the data down to just the high schools in Massachusetts since only high school students take the SAT and that was the response variable for my data set. 
 
 ```{r Loading Data Package}
 library(tidyverse)
 library(readr)
 data_final <- read_csv("MA_Public_Schools_2017.csv")
+View(data_final)
 
 ```
 ```{r Filtering Dataset}
 data_highschool <- data_final |>
   filter(`12_Enrollment` >= 1 | `11_Enrollment` >= 1 | `10_Enrollment` >= 1 | `9_Enrollment` >= 1)
 ##In this chunk, I filter the MA Public Schools data in order to just get schools with High school students enrolled since those are the only students that will be taking the SAT, which is the metric I am using for student performance.
+
+
+data_highschool <- data_highschool |>
+  mutate(Average_SAT = `Average SAT_Reading` + `Average SAT_Writing` + `Average SAT_Math`)
 ```
 
 
@@ -47,11 +56,10 @@ In this section, I've created scatter plot of Average SAT score compared to the 
 ## Results
 ```{r SAT Scores for Minimum and Maximum Pay}
 library(tidyverse)
-salary_tible <- data_highschool |>
+salary_tibble <- data_highschool |>
   group_by(`Average Salary`) |>
-  summarize(avg_SAT = mean(Average_SAT))
-
-
+  distinct(Average_SAT) |>
+  ungroup()
 
 most_paid <- salary_tibble |>
   slice_max(`Average Salary`, n = 5)
@@ -113,8 +121,6 @@ One possible confounding factor is that not all schools use SAT scores as a prim
 ```{r Scatter Plot of Average SAT Score compared to Expenditures per Pupil}
 library(ggplot2)
 
-data_highschool <- data_highschool |>
-  mutate(Average_SAT = `Average SAT_Reading` + `Average SAT_Writing` + `Average SAT_Math`)
 
 ggplot(data = data_highschool,
        mapping = aes(x = `Average In-District Expenditures per Pupil`,
