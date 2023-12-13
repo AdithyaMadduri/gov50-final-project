@@ -76,7 +76,8 @@ knitr::kable(least_paid, col.names = c("5 Lowest Average Salaries in dollars", "
 
 
 
-##In this code, we are collecting the 5 schools with the highest average salary and the 5 schools with the lowest average salary, and gettinng the average SAT score at each of those schools.
+##In this code, we are collecting the 5 schools with the highest average salary and the 5 schools with the lowest average salary, 
+##and getting the average SAT score at each of those schools.
 ```
 Looking at the data for the 5 highest and 5 lowest average salaries by school, we can see that schools with the 5 highest average salaries tend to have higher average SAT scores than districts than schools with the 5 lowest average salaries. This points to the need for further analysis of the data, since this does not conclusively suppourt the relationship we found in the previous scatter plot.
 
