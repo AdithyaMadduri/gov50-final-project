@@ -20,6 +20,8 @@ My original data was sourced from the Massachusetts Department of Elementary and
 
 My initial data set contained 302 variables for over 1,861 schools. Some of the variables included the name of the school, the type of school it was, enrollment numbers per grade, the demographic make-up of the school, salary totals, scores on standardized state and national exams. However, an important note was that the data initially contained information about all the schools in Massachusetts, so I decided to filter the data down to just the high schools in Massachusetts since only high school students take the SAT and that was the response variable for my data set. 
 
+The one variable I had to create for my data set, which I did so in the filtering dataset code chunk below, was the average SAT score for each school. I did this by adding up the average SAT math, average SAT reading, and average SAT writing scores for each of the schools. This then allowed me to get an average total SAT score for each of the schools which I was then able to use for each of my analyses. 
+
 ```{r Loading Data Package}
 library(tidyverse)
 library(readr)
