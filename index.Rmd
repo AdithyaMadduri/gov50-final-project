@@ -35,7 +35,8 @@ data_final <- read_csv("MA_Public_Schools_2017.csv")
 ```{r Filtering, Tidying, and Mutating the Dataset}
 data_highschool <- data_final |>
   filter(`12_Enrollment` >= 1 | `11_Enrollment` >= 1 | `10_Enrollment` >= 1 | `9_Enrollment` >= 1)
-##In this chunk, I filter the MA Public Schools data in order to just get schools with High school students enrolled since those are the only students that will be taking the SAT, which is the metric I am using for student performance.
+##In this chunk, I filter the MA Public Schools data in order to just get schools with High school students enrolled 
+##since those are the only students that will be taking the SAT, which is the metric I am using for student performance.
 
 
 data_highschool <- data_highschool |>
@@ -61,7 +62,9 @@ ggplot(data = data_highschool,
 In this section, I've created scatter plot of Average SAT score compared to the Average salary per school overlaid with a line of best fit for the data. Looking at just the data points on the scatter plot, it appears that there is little correlation between the two variables. However, when I overlay the scatter plot with a line of best fit, I can see that there is a negative correlation between average salary per school and the average SAT score. The negative slope on the line means indicates that the correlation between salary totals and SAT test scores is negative. Therefore, as teacher salary totals increase, I would expect to see lower SAT test scores. One note is that this line of best fit is likely skewed by the presence of certain outlier values both those with very high SAT scores and those with very low SAT scores. Looking at the plot, it seems that if these outlier points were eliminated, the line of best fit would be close to linear. This suggests that at least there is no increase or improvement in SAT scores as the average teacher salary per school increases. However, with the outlier data points left in the dataset, it appears that there is a negative relationship between Average Teacher Salary and Average SAT score. Therefore, the data suggest that student SAT performance is negatively affected by increasing teacher salaries.
 
 ## Results
+
 To begin studying the results, I wanted to gain a preliminary understanding of what the results looked like, especially since my initial hypothesis appeared to be contradicted by the scatter plot I created. Therefore, I chose to take a quick sample of the 5 highest and lowest average salaries and view their associated average SAT scores. 
+
 ```{r SAT Scores for Minimum and Maximum Pay}
 library(tidyverse)
 salary_tibble <- data_highschool |>
