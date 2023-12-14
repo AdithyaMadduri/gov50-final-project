@@ -63,7 +63,7 @@ In this section, I've created scatter plot of Average SAT score compared to the 
 
 ## Results
 
-To begin studying the results, I wanted to gain a preliminary understanding of what the results looked like, especially since my initial hypothesis appeared to be contradicted by the scatter plot I created. Therefore, I chose to take a quick sample of the 5 highest and lowest average salaries and view their associated average SAT scores. 
+To begin studying the results, I wanted to gain a preliminary understanding of what the results looked like, especially since my initial hypothesis appeared to be contradicted by the scatter plot I created. Therefore, I chose to take a quick sample of the 5 highest and lowest average salaries and view and compare their associated average SAT scores.
 
 ```{r SAT Scores for Minimum and Maximum Pay}
 library(tidyverse)
