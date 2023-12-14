@@ -29,7 +29,7 @@ library(readr)
 data_final <- read_csv("MA_Public_Schools_2017.csv")
 
 ```
-```{r Filtering Dataset}
+```{r Filtering, Tidying, and Mutating the Dataset}
 data_highschool <- data_final |>
   filter(`12_Enrollment` >= 1 | `11_Enrollment` >= 1 | `10_Enrollment` >= 1 | `9_Enrollment` >= 1)
 ##In this chunk, I filter the MA Public Schools data in order to just get schools with High school students enrolled since those are the only students that will be taking the SAT, which is the metric I am using for student performance.
@@ -81,7 +81,7 @@ knitr::kable(least_paid, col.names = c("5 Lowest Average Salaries in dollars", "
 ```
 Looking at the data for the 5 highest and 5 lowest average salaries by school, we can see that schools with the 5 highest average salaries tend to have higher average SAT scores than districts than schools with the 5 lowest average salaries. This points to the need for further analysis of the data, since this does not conclusively suppourt the relationship we found in the previous scatter plot.
 
-```{r Linear Coefficient Calculation}
+```{r Linear Coefficient Calculation between Average Salary and Average SAT}
 fit <- lm(`Average Salary` ~ Average_SAT, data = data_highschool)
 coef(fit)
 modelsummary::modelsummary(fit,
@@ -90,6 +90,15 @@ modelsummary::modelsummary(fit,
                            gof_map = c("nobs", "r.squared", "adj.r.squared"))
 ```
 In the above code, I ran a linear regression so that we could get a clearer picture of the relationship between average Salary and Average SAT scores. As we can see from the coefficients for the linear regression, looking at all high schools in the state of Massachusetts for the year 2017, as average Salary increases the average SAT score for the high school decreases by roughly 4.4 points. This suggests a correlation, but does not necessarily imply a causal effect, we simply know that higher average teacher salaries are linked with lower average SAT scores. There could be many other factors influencing student SAT scores outside of teacher pay. 
+
+```{r Linear Coefficient Calculator with controlling for possible confounding factors}
+multitable2017 <- lm(`Average Salary` ~ Average_SAT + `Average Class Size` + `Economically Disadvantaged`, data = data_highschool) |>
+  broom::tidy() |>
+  select(term, estimate, p.value) |>  
+  knitr::kable(digits = 2)
+print(multitable2017)
+```
+Here, I ran a linear regression that controlled for possible confounders like large class size and the number of students who were classified into the "Economically Disadvantaged" group. I expected that controlling for possible confounding variables like this one would lead to a less negative coefficient between teacher salary and student SAT score performance, however controlling for this variables very surprisingly resulted in an even more negative linear coefficient between Average Salary and Average SAT score. This further suppourts the claim that simply increasing teacher salaries do not contribute to enhanced student performance, at least when measuring student performance based on Average SAT scores. 
 
 ```{r Averge SAT Score per Pay Range}
 data_highschool <- data_highschool |>
@@ -152,4 +161,4 @@ ggplot(data = data_highschool,
 This last scatter plot represents the salary totals for teachers on the x-axis rather than just the average salary. This helps to provide a clearer picture of how much a school actually spends on paying its teachers and how that correlates with average SAT scores for that school. This graph also shows a negative correlation, which supports the overall idea that simply spending more to educate students is not an effective strategy for boosting SAT performance.
 
 ## Conclusions
-From the data it is clear that there was a negative correlation between teacher salaries and average SAT scores for Public high schools in the state of Massachusetts for the year 2017. Though this data set represents just one state's public high schools in a single school year, the data still points to an interesting, if slightly troubling, conclusion. With that being said, its important to not firstly that correlation does not imply that there is a causal relationship between the two variables. There are some potential explanations for why this data is the way it is, which I discussed in the explanation of results section. Overall, I was able to answer my initial research question which was "Do higher teacher salaries contribute to enhanced student academic performance?". In my study, I used student SAT scores as a benchmark for academic performance compared average SAT scores to average teacher salaries. The findings from my study did not support my initial hypothesis that higher teacher salaries would contribute to better student SAT performance. This finding surprised me since funding is a topic that is frequently at the forefront of education policy. From this data, we can see that there are a multitude of factors contributing to student performance and that simply raising teacher salaries(or raising in district expenditures as shown in the confounding variables section) might not be enough to improve student SAT scores.
+From the data it is clear that there was a negative correlation between teacher salaries and average SAT scores for Public high schools in the state of Massachusetts for the year 2017. Though this data set represents just one state's public high schools in a single school year, the data still points to an interesting, if slightly troubling, conclusion. With that being said, its important to not firstly that correlation does not imply that there is a causal relationship between the two variables. There are some potential explanations for why this data is the way it is, which I discussed in the explanation of results section. Overall, I was able to answer my initial research question which was "Do higher teacher salaries contribute to enhanced student academic performance?". In my study, I used student SAT scores as a benchmark for academic performance compared average SAT scores to average teacher salaries. The findings from my study did not support my initial hypothesis that higher teacher salaries would contribute to better student SAT performance. This finding surprised me since funding is a topic that is frequently at the forefront of education policy. From this data, we can see that there are a multitude of factors contributing to student performance and that simply raising teacher salaries(or raising in district expenditures as shown in the confounding variables section) might not be enough to improve student SAT scores. If I had more time and resources, I could improve my project by looking at a broader range of data and looking at different metrics. As mentioned before, SAT scores are not the 
